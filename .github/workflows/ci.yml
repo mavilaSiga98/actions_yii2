@@ -25,7 +25,7 @@ jobs:
       run: composer validate
 
     - name: Install dependencies
-      run: composer install --prefer-dist --no-progress --no-interaction --no-suggest
+      run: composer update --prefer-dist --no-progress --no-interaction --no-suggest
 
     - name: Checkout Yii2
       uses: actions/checkout@v2
