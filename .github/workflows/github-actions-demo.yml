@@ -18,4 +18,5 @@ jobs:
       - name: ☁ Pruebas en base de datos
         run: |
           mysql --version
+          service mysql start
           service --status-all
