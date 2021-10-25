@@ -17,4 +17,4 @@ jobs:
       - run: echo "🍏 This job's status is ${{ job.status }}."
       - name: ☁ Pruebas en base de datos
         run: |
-          mysql -v
+          mysql --version
