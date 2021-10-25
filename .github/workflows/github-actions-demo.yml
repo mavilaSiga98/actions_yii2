@@ -21,15 +21,10 @@ jobs:
           mysql --version
           sudo service mysql start
           service --status-all
-<<<<<<< HEAD
 
       - name: Setup Runner Database
         run: |
           mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS portal_mandatos;'
           mysql -uroot -h127.0.0.1 -proot portal_mandatos < etc/databases/portal_mandatos.sql;
           mysql -uroot -h127.0.0.1 -proot -e 'SHOW DATABASES;'
-=======
-          sudo mysql -u root -p
-          create database portal_mandatos;
-          show databases;
->>>>>>> abcd9c96ab1ab011b88ecd0be0ec5b14c66cd7fd
+
