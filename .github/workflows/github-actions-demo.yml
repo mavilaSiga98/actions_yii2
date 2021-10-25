@@ -18,6 +18,4 @@ jobs:
       - name: ☁ Pruebas en base de datos
         run: |
           mysql --version
-          mysql -u root create data base portal_mandatos
-          mysql -u root portal_mandatos < tests/_data/portal_mandatos.sql
-          mysql show tables
+          service --status-all
