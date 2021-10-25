@@ -20,6 +20,6 @@ jobs:
           mysql --version
           sudo service mysql start
           service --status-all
-          mysql -u root -p
+          sudo mysql -u root -p
           create database portal_mandatos;
           show databases;
