@@ -86,7 +86,10 @@ jobs:
       
       - name: 👿 Wait for the environment to get up
         run: |
-          sleep 4
+          while ! mysql -uroot -h127.0.0.1 -proot -Dportal_mandatos -e 'SELECT COUNT(*) FROM user;' --silent &> /dev/null ; do
+              echo "Waiting for database connection..."
+              sleep 2
+          done
 
       - name: Run tests with codeception
         run: |
