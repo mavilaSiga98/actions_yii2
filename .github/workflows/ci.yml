@@ -86,7 +86,7 @@ jobs:
       
       - name: 👿 Wait for the environment to get up
         run: |
-          sleep 10
+          sleep 4
 
       - name: Run tests with codeception
         run: |
