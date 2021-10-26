@@ -3,9 +3,6 @@
 namespace tests\unit\models\mandatos;
 
 use app\models\Mandatos\Mandato;
-use app\tests\fixtures\LimitPhoneFixture;
-use app\tests\fixtures\MandatosFixture;
-use app\tests\fixtures\UserFixture;
 use Yii;
 
 class CheckMobileRestrictionTest extends \Codeception\Test\Unit
@@ -14,7 +11,7 @@ class CheckMobileRestrictionTest extends \Codeception\Test\Unit
      * @var \UnitTester
      */
     public $tester;
-    
+
     public function testPhoneIsFromDealership()
     {
         Yii::$app->user->loginByAccessToken('B-D28eL7zz6-BSx8Gx-E2GGdT3vEmhsy'); //authkey
