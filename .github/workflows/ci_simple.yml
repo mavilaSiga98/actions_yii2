@@ -25,6 +25,7 @@ jobs:
           mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS portal_mandatos;'
           mysql -uroot -h127.0.0.1 -proot portal_mandatos < etc/databases/portal_mandatos.sql;
           mysql -uroot -h127.0.0.1 -proot -e 'SHOW DATABASES;'
+          mysql -uroot -h127.0.0.1 -proot -e 'alter user "root"@"localhost" identified with mysql_native_password by "";'
 
       - name: Run tests with codeception
         run: |
