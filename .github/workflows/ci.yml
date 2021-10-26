@@ -70,20 +70,27 @@ jobs:
           key: php${{ matrix.php }}-composer-${{ matrix.dependencies }}-${{ hashFiles('**/composer.json') }}
           restore-keys: |
             php${{ matrix.php }}-composer-${{ matrix.dependencies }}-
-      - name: Install dependencies with composer php PHP [5.6 - 8.0]
-        run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
-
-      - name: ☁ Pruebas en base de datos
+      
+      - name: ☁ base de datos
         run: |
+          mysql --version
           sudo service mysql start
 
       - name: 🚗 Setup Runner Database
         run: |
-          sudo mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS portal_mandatos;'
-          sudo mysql -uroot -h127.0.0.1 -proot portal_mandatos < etc/databases/portal_mandatos.sql;
-          sudo mysql -uroot -h127.0.0.1 -proot -e 'SHOW DATABASES;'
+          mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS portal_mandatos;'
+          mysql -uroot -h127.0.0.1 -proot portal_mandatos < etc/databases/portal_mandatos.sql;
+          mysql -uroot -h127.0.0.1 -proot -e 'SHOW DATABASES;'
+          mysql -uroot -h127.0.0.1 -proot -e 'alter user "root"@"localhost" identified with mysql_native_password by "";'
+        
+      - name: 🆗 Check Requirements
+        run: |
+          php requirements.php
+      
+      - name: Install dependencies with composer php PHP [5.6 - 8.0]
+        run: composer update --prefer-dist --no-interaction --no-progress --optimize-autoloader --ansi
 
-      - name: Run tests with codeception
+      - name: 🧾 Run tests with codeception
         run: |
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
           php -S 127.0.0.1:8080 -t public > ./runtime/yii.log 2>&1 &
