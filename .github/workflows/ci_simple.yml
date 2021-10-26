@@ -2,7 +2,7 @@ on:
   - pull_request
   - push
 
-name: build
+name: CI default
 
 jobs:
   Ci_simple:
@@ -25,13 +25,6 @@ jobs:
           mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS portal_mandatos;'
           mysql -uroot -h127.0.0.1 -proot portal_mandatos < etc/databases/portal_mandatos.sql;
           mysql -uroot -h127.0.0.1 -proot -e 'SHOW DATABASES;'
-      
-      - name: 👿 Wait for the environment to get up
-        run: |
-          while ! mysql -uroot -h127.0.0.1 -proot -Dportal_mandatos -e 'SELECT COUNT(*) FROM user;' --silent &> /dev/null ; do
-              echo "Waiting for database connection..."
-              sleep 2
-          done
 
       - name: Run tests with codeception
         run: |
