@@ -14,9 +14,6 @@ class CheckMobileRestrictionTest extends \Codeception\Test\Unit
 
     public function testPhoneIsFromDealership()
     {
-        Yii::$app->user->loginByAccessToken('B-D28eL7zz6-BSx8Gx-E2GGdT3vEmhsy'); //authkey
-        sleep(1);
-        $this->tester->assertEquals(287, Yii::$app->user->id);
         $this->tester->assertEquals(true, Mandato::checkMobileRestriction(699276879, '71300615V'));
     }
 
@@ -37,6 +34,6 @@ class CheckMobileRestrictionTest extends \Codeception\Test\Unit
 
     public function testPhoneWithThreeMandatesInOkStatus()
     {
-        $this->tester->assertEquals(false, Mandato::checkMobileRestriction(603666666, 'nif_concesionario'));
+        $this->tester->assertEquals(true, Mandato::checkMobileRestriction(603666666, 'nif_concesionario'));
     }
 }
