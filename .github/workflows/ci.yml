@@ -77,14 +77,17 @@ jobs:
         run: |
           mysql --version
           sudo service mysql start
-          service --status-all
 
       - name: Setup Runner Database
         run: |
           mysql -uroot -h127.0.0.1 -proot -e 'CREATE DATABASE IF NOT EXISTS portal_mandatos;'
           mysql -uroot -h127.0.0.1 -proot portal_mandatos < etc/databases/portal_mandatos.sql;
           mysql -uroot -h127.0.0.1 -proot -e 'SHOW DATABASES;'
-          
+      
+      - name: 👿 Wait for the environment to get up
+        run: |
+          sleep 10
+
       - name: Run tests with codeception
         run: |
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
