@@ -2,7 +2,7 @@ on:
   - pull_request
   - push
 
-name: CI default
+name: Simple CI
 
 jobs:
   Ci_simple:
