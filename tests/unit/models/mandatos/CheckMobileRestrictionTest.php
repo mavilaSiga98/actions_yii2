@@ -12,7 +12,7 @@ class CheckMobileRestrictionTest extends \Codeception\Test\Unit
      */
     public $tester;
 
-    public function testPhoneIsFromDealership()
+    /* public function testPhoneIsFromDealership()
     {
         $this->tester->assertEquals(true, Mandato::checkMobileRestriction(699276879, '71300615V'));
     }
@@ -35,5 +35,5 @@ class CheckMobileRestrictionTest extends \Codeception\Test\Unit
     public function testPhoneWithThreeMandatesInOkStatus()
     {
         $this->tester->assertEquals(true, Mandato::checkMobileRestriction(603666666, 'nif_concesionario'));
-    }
+    } */
 }
