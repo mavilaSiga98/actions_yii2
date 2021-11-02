@@ -24,53 +24,15 @@ class Mandato extends ActiveRecord
 		return 'mandatos';
 	}
 
-	public static function checkMobileRestriction($telefono, $nif_concesionario)
+	public static function checkMobileRestriction()
 	{
-		$currentUserProfile = (new Query())
-		->select(['telefono', 'nif_concesionario'])
-		->from('user_profile')
-		->where(['user_id' => Yii::$app->user->id])
+		$row = (new Query())
+		->select(['username'])
+		->from('user')
+		->where(['id' => 1])
 		->one();
 
-		if (isset($currentUserProfile['telefono']) && is_numeric($currentUserProfile['telefono'])) {
-			if ($currentUserProfile['telefono'] == $telefono && $currentUserProfile['nif_concesionario'] == $nif_concesionario) {
-				return true;
-			}
-		}
-
-		$limitPhone = (new Query())
-		->select(['nVeces', 'isInfinite'])
-		->from('limit_phone')
-		->where(['telefono' => $telefono])
-		->one();
-
-		if (isset($limitPhone['isInfinite']) && $limitPhone['isInfinite']) {
-			return true;
-		}
-
-		$mandatos = (new Query())
-		->select(['COUNT(*) as nVeces'])
-		->from('mandatos')
-		->where(['telefono_mandante' => $telefono])
-		->andWhere(['!=', 'estado', 'EXP_MAN'])
-		->andWhere(['!=', 'estado', 'REJECT'])
-		->andWhere(['!=', 'estado', 'SAVED'])
-		->andWhere(['>=', 'DATE(FROM_UNIXTIME(fecha_expiracion))', date('Y-m-d')])
-		->one();
-		$countOfMandates = $mandatos['nVeces'];
-
-		if (isset($limitPhone['nVeces']) && is_numeric($limitPhone['nVeces'])) {
-			if ($limitPhone['nVeces'] > $countOfMandates) {
-				return true;
-			}
-			return false;
-		}
-
-		if ($countOfMandates >= Yii::$app->params['mandatos.max_mandato_por_movil']) {
-			return false;
-		}
-
-		return true;
+		return $row['username'];
 	}
 	
 	
