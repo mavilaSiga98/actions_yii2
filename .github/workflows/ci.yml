@@ -94,6 +94,6 @@ jobs:
       - name: 🧾 Run tests with codeception
         run: |
           sed -i "s/'cookieValidationKey' => ''/'cookieValidationKey' => 'testkey'/" config/web.php
-          php -S 127.0.0.1:8080 -t public > ./runtime/yii.log 2>&1 &
+          php -S 127.0.0.1:8080 -t web > ./runtime/yii.log 2>&1 &
           vendor/bin/codecept run
         shell: bash
